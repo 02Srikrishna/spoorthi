@@ -1,0 +1,590 @@
+=================program 1===============
+class Calculator:
+    def __init__(self, a, b):
+        self.x = a
+        self.y = b
+
+    def addition(self):
+        result = self.x + self.y
+        print("result",result)
+
+    def subtraction(self):
+        result = self.x - self.y
+        print("result",result)
+
+    def multiplication(self):
+        result = self.x * self.y
+        print("result",result)
+
+    def division(self):
+        result = self.x / self.y
+        print("result",result)
+
+    def modulus(self):
+        result = self.x + self.y
+        print("result",result)
+
+a = int(input("enter the first number:"))
+b = int(input("enter the second number:"))
+k = Calculator(a, b)
+ch = input("enter the operator +, -, *, /, %: ")
+if ch == '+':
+    k.addition()
+elif ch == '-':
+    k.subtraction()
+elif ch == '*':
+    k.multiplication()
+elif ch == '/':
+    k.division()
+elif ch == '%':
+    k.modulus()
+else:
+    print("enter a valid operator")
+
+===========program 2 linear search===============
+
+# linear search
+import matplotlib
+import matplotlib.pyplot as plt
+matplotlib.use('TKAgg')
+
+def linearsearch(thevalues,target):
+    n = len(thevalues)
+    for i in range(n):
+        if thevalues[i] == target:
+            return True
+        return False
+    thevalues =[10, 50, 60, 70, 80, 20]
+    target = 20
+    if linearsearch(thevalues,target):
+        print("target value found in the list")
+    else:
+        print("the target valu not found in the list")
+
+    x = list(range(1, 10000))
+    plt.plot(x, [y for y in x])
+    plt.title("linear search -time complexity is o(n)")
+    plt.xlabel("input")
+    plt.ylabel("time")
+    plt.show()
+
+=======program 3 bubble sort========
+
+import matplotlib
+import matplotlib.pyplot as plt
+matplotlib.use('TKAgg')
+
+def bubblesort(theseq):
+    n = len(theseq)
+    for i in range(n-1):
+        if theseq[i] > theseq[i+1]:
+            tmp = theseq[i]
+            theseq[i] = theseq[i+1]
+            theseq[i+1] = tmp
+    theseq = [10, 70, 15, 8, 80, 90, 20]
+    print("befor sorting", theseq)
+    bubblesort(theseq)
+    print("after sorting", theseq)
+
+    x = list(range(1, 10000))
+    plt.plot(x, [y*y for y in x])
+    plt.title("bubble sorttime complexity is o(n\u00b2)")
+    plt.xlabel("input")
+    plt.ylabel("time")
+    plt.show()
+
+====================linked list ==============
+
+class Node:
+    def __init__(self, data=None):
+        self.data = data
+        self.next = None
+class singlylinkedlist:
+    def __init__(self):
+        self.first = None
+    def insertfirst(self, data):
+        temp = Node(data)
+        temp.next = self.first
+        self.first = temp
+    def removeFirst(self):
+        if self.first is None:
+            print("list is empty")
+        else:
+            cur = self.first
+            self.first = self.first.next
+            print("the deleted item is", cur.data)
+    def display(self):
+        if(self.first==None):
+            print("list is empty")
+            return
+        cur = self.first
+        while cur is not None:
+            print(cur.data, end="")
+            cur = cur.next
+sll = singlylinkedlist()
+while True:
+    ch = int(input("\n enter your choice 1-insert 2-delect 3-display 4-exit: "))
+    if ch == 1:
+        item = input("enter the element to instert : ")
+        sll.insertfirst(item)
+        sll.display()
+    elif ch == 2:
+        sll.removeFirst()
+        sll.display()
+    elif ch == 3:
+        sll.display()
+    elif ch == 4:
+        break
+    else:
+        print(" not a valid choice")
+
+
+===============================selection sort====================
+
+import matplotlib
+import matplotlib.pyplot as plt
+matplotlib.use('TKAgg')
+
+def selection_sort(theseq):
+    n = len(theseq)
+    for i in range(n):
+        for j in range(i+1, n):
+            if theseq[i] > theseq[j]:
+                temp = theseq[i]
+                theseq[i] = theseq[j]
+                theseq[j] = temp
+theseq = [10, 70, 15, 8, 80, 90, 20]
+print("befor sorting", theseq)
+selection_sort(theseq)
+print("after sorting", theseq)
+
+x = list(range(1, 10000))
+plt.plot(x, [y*y for y in x])
+plt.title("selection_sort complexity is o(n\u00b2)")
+plt.xlabel("input")
+plt.ylabel("time")
+plt.show()
+
+======================binary search===============
+
+import matplotlib
+import matplotlib.pyplot as plt
+matplotlib.use('TKAgg')
+import math
+def binary_search(theValues, low, high, term):
+    while low<=high:
+        mid = (low + high)//2
+        if theValues[mid] == term:
+            return mid
+        elif term< theValues[mid]:
+            high = high-1
+        else:
+            low = mid+1
+            return False
+theValues=[10, 20, 30, 40, 50, 60, 70]
+target = 20
+tmp = binary_search(theValues, 0, len(theValues)-1, target)
+if tmp == -1:
+    print("the target value not found in the list")
+else:
+    print("the target found in the list at location ", tmp)
+
+
+x = list(range(1, 10000))
+plt.plot(x, [math.log(y, 2) for y in x])
+plt.title("binary search complexity is o(log n)")
+plt.xlabel("input")
+plt.ylabel("time")
+plt.show()
+
+========================= quick sort ===========================
+
+import matplotlib
+import matplotlib.pyplot as plt
+matplotlib.use('TkAgg')
+import math
+def partition(array, low, high):
+    pivot = array[low]
+    left = low + 1
+    right = high
+    while True:
+        while left < right and pivot > array[left]:
+            left += 1
+        while right >= left and array[right] > pivot:
+            right -= 1
+        if left < right:
+            array[left], array[right] = array[right], array[left]
+        else:
+            break
+    array[low], array[right] = array[right], array[low]
+    return right
+def quick_sort(array, low, high):
+    if low > high:
+        return
+    else:
+        pi = partition(array, low, high)
+        quick_sort(array, low, pi - 1)
+        quick_sort(array, pi + 1, high)
+
+array = [10, 70, 15, 8, 80, 90, 20]
+print("Before Sorting", array)
+quick_sort(array, 0, len(array) - 1)
+print("After Sorting", array)
+x = list(range(1, 10000))
+plt.plot(x, [y * y for y in x])
+plt.title("Quick Sort- Time Complexity is O(n\u00b2)")
+plt.xlabel("Input")
+plt.ylabel("Time")
+plt.show()
+
+============================== insertion sort ==============================
+
+import matplotlib
+import matplotlib.pyplot as plt
+matplotlib.use('TkAgg')
+import math
+
+def MergeSort(arr):
+    if len(arr)==1:
+       return arr
+    mid = len(arr)//2
+    first_half = MergeSort(arr[:mid])
+    second_half = MergeSort(arr[mid:])
+    return SimpleMerge(first_half,second_half)
+
+def SimpleMerge(L,R):
+   i = j = 0
+   temp = []
+   while i < len(L) and j < len(R):
+       if L[i] < R[j]:
+           temp.append(L[i])
+           i = i + 1
+       else:
+           temp.append(R[j])
+           j = j + 1
+       while i < len(L):
+           temp.append(L[i])
+           i = i + 1
+       while j < len(R):
+           temp.append(R[j])
+           j = j + 1
+       return temp
+
+arr = [40, 80, 10, 50, 30, 20, 70, 60]
+print("List before Sorting",arr)
+result=MergeSort(arr)
+print("Sorted List is ", result)
+
+x = list(range(1, 10000))
+plt.plot(x, [y*math.log(y, 2) for y in x])
+plt.title("Merge Sort- Time Complexity is O(n log n)")
+plt.xlabel("Input")
+plt.ylabel("Time")
+plt.show()
+
+======================================= double linked list ================================
+
+class Node:
+    def __init__(self,data):
+        self.data = data
+        self.prev = None
+        self.last = None
+        self.next = None
+
+class doublylinkedlist:
+    def __init__(self):
+        self.head = None
+
+    def insert_beginning(self):
+        data = int(input("Enter the data: "))
+        nb = Node(data)
+        if self.head is None:
+            self.head = nb
+            print(nb.data, "Inserted Successfully...")
+        else:
+            nb.next = self.head
+            self.head.prev = nb
+            self.head = nb
+            print(nb.data,"Inserted Successfully...")
+
+    def insert_end(self):
+        data = int(input("Enter the data: "))
+        nb = Node(data)
+        last = self.head
+        nb.next = None
+        if self.head is None:
+            nb.prev = None
+            self.head = nb
+        else:
+
+             while last.next != None:
+                 last = last.next
+             last.next = nb
+             nb.prev = last
+             print(nb.data,"Inserted Successfully")
+
+
+    def delete_beginning(self):
+        if self.head is None:
+            print("Double linked list is empty")
+        else:
+            temp = self.head
+            self.head = self.head.next
+            self.head.prev = None
+            print(temp.data,"Deleted Successfully")
+
+    def delete_end(self):
+        if self.head is None:
+            print("Double linked list is empty")
+        else:
+            temp = self.head
+            while temp.next != None:
+                temp = temp.next
+            temp.prev.next = None
+            print(temp.data,"Deleted Successfully")
+
+    def display(self):
+        if self.head is None:
+            print("Double linked list is empty")
+        else:
+         temp = self.head
+         while temp:
+           print(temp.data,"-->",end="")
+           temp = temp.next
+
+l = doublylinkedlist()
+while True:
+    ch = int(input("\n Enter your choice 1-Insert at beginning 2-Insert at end 3-Delete at beginning 4-Delete at end 5-Display 6-Exit: "))
+    if ch == 1:
+     l.insert_beginning()
+
+    elif ch == 2:
+     l.insert_end()
+    elif ch == 3:
+     l.delete_beginning()
+    elif ch == 4:
+     l.delete_end()
+    elif ch == 5:
+     l.display()
+    elif ch == 6:
+     break
+    else:
+     print("Enter valid choice")
+
+======================================== circular linked list =================================
+
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.prev = None
+        self.next = None
+
+class CircularLinkedList:
+    def __init__(self):
+        self.head = None
+
+    def insert_beginning(self):
+        data = int(input("Enter the data: "))
+        nb = Node(data)
+        if self.head is None:
+            nb.next = nb
+            nb.prev = nb
+            self.head = nb
+        else:
+            temp = self.head
+            while temp.next != self.head:
+                temp = temp.next
+            nb.next = self.head
+            nb.prev = temp
+            temp.next = nb
+            self.head.prev = nb
+            self.head = nb
+
+    def insert_end(self):
+        data = int(input("Enter the data: "))
+        nb = Node(data)
+        if self.head is None:
+            nb.next = nb
+            nb.prev = nb
+            self.head = nb
+        else:
+            temp = self.head
+            while temp.next != self.head:
+                temp = temp.next
+            temp.next = nb
+            nb.prev = temp
+            nb.next = self.head
+            self.head.prev = nb
+
+    def delete_beginning(self):
+        if self.head is None:
+            print("Circular linked list is empty")
+        elif self.head.next == self.head:
+            self.head = None
+        else:
+            temp = self.head
+            while temp.next != self.head:
+                temp = temp.next
+            temp.next = self.head.next
+            self.head.next.prev = temp
+            self.head = self.head.next
+
+    def delete_end(self):
+        if self.head is None:
+            print("Circular linked list is empty")
+        elif self.head.next == self.head:
+            self.head = None
+        else:
+            temp = self.head
+            while temp.next.next != self.head:
+                temp = temp.next
+            temp.next = self.head
+            self.head.prev = temp
+
+    def display(self):
+        if self.head is None:
+            print("Circular linked list is empty")
+        else:
+            temp = self.head
+            print("==>", end="")
+            while True:
+                print(temp.data, end="<====>")
+                temp = temp.next
+                if temp == self.head:
+                    break
+            print("\n")
+
+# Test the CircularLinkedList class
+cll = CircularLinkedList()
+while True:
+    ch = int(input("\nEnter your choice: 1-Insert at beginning, 2-Insert at end, 3-Delete at beginning, 4-Delete at end, 5-Display, 6-Exit: "))
+    if ch == 1:
+        cll.insert_beginning()
+    elif ch == 2:
+        cll.insert_end()
+    elif ch == 3:
+        cll.delete_beginning()
+    elif ch == 4:
+        cll.delete_end()
+    elif ch == 5:
+        cll.display()
+    elif ch == 6:
+        break
+    else:
+        print("Enter a valid choice")
+
+========================================= stock using list ==================================================
+
+class Stack:
+    def __init__(self):
+        self.items = []
+
+    def isempty(self):
+        return len(self.items) == 0
+
+    def push(self, item):
+        self.items.append(item)
+
+    def pop(self):
+        if self.isempty():
+            print("Stack is empty")
+        else:
+            item = self.items[-1]
+            del self.items[-1]
+            print("The popped element is:", item)
+
+    def display(self):
+        if self.isempty():
+            print("Stack is empty")
+        else:
+            for i in reversed(self.items):
+                print(i)
+
+    def peek(self):
+        if self.isempty():
+            print("Stack is empty")
+            return None
+        else:
+            print("Top item is:", self.items[-1])
+            return self.items[-1]
+
+s = Stack()
+while True:
+    ch = int(input("\nEnter your choice: 1-push, 2-pop, 3-display, 4-peek, 5-Exit: "))
+    if ch == 1:
+        item = input("Enter the item to push: ")
+        s.push(item)
+    elif ch == 2:
+        s.pop()
+    elif ch == 3:
+        s.display()
+    elif ch == 4:
+        s.peek()
+    else:
+        break
+
+======================================= fibonacci series =====================================
+
+def fib(n):
+    if n == 0:
+        return 0
+    elif n == 1 or n == 2 :
+        return 1
+    else:
+        return fib(n-1) + fib(n-2)
+n = int(input("enter the number"))
+print("fibonacci series of %d numbers are : " % n, end="")
+for i in range(0, n):
+    print(fib(i), end="")
+
+=========================================rersive opreation (factorial)==============================
+
+def factorial(n):
+    if n == 0:
+        return 1
+    else:
+        return(n* factorial(n-1))
+num = int(input("enter a number to find its factorial valuee : "))
+print((" factorial of", num , "is", factorial (num)))
+
+======================================= Towers of Hanoi ===================================
+ 
+def TowerOfHanoi(n, source, destination, auxiliary):
+    if n ==1:
+        print("move disk", n, "from source", source, "to destination", destination)
+        return
+    TowerOfHanoi(n-1, source, auxiliary, destination)
+    print("move disk", n, "from source", source, "to destination", destination)
+    TowerOfHanoi(n-1, auxiliary, destination, source)
+n = 4
+TowerOfHanoi(n, 'A', 'B', 'C')
+
+==================================binary search revarsive =============================
+
+import matplotlib
+import matplotlib.pyplot as plt
+matplotlib.use('TkAgg')
+import math
+
+def binarysearch(a,low, high, key):
+    if low <= high:
+        mid = (high + low)//2
+        if a[mid] == key:
+            print("search successful key found at location:", mid+1)
+            return
+        elif key < a[mid]:
+            binarysearch(a, low, mid-1, k)
+        else:
+            binarysearch(a, mid+1, high, k)
+    else:
+        print("search unsuccessful")
+a = [13,24,35,46,57,68,79]
+print("the array elements are:", a)
+k = int(input("enter the key element to search:"))
+binarysearch(a, 0, len(a)-1, k)
+x=list(range(1, 10000))
+plt.plot(x, [math.log(y, 2) for y in x])
+plt.title("Binary search- Time Complexity is O(logn)")
+plt.xlabel("Input")
+plt.ylabel("Time")
+plt.show()
